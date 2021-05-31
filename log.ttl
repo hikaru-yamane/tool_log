@@ -1,0 +1,53 @@
+;===========================================================================
+;; 接続情報
+hostName = params[2]
+portNum  = params[3]
+userName = params[4]
+keyFile  = params[5]
+;; ログ
+;logFile  = params[6]
+;===========================================================================
+
+;; 秘密鍵
+;getdir path
+;makepath keyFile path keyFile
+
+;; 接続
+command = ''
+strconcat command hostName
+strconcat command ':'
+strconcat command portNum
+strconcat command ' /ssh /2 /auth=publickey /user='
+strconcat command userName
+strconcat command ' /keyfile='
+strconcat command keyFile
+connect command
+wait '$'
+
+;; 接続確認（常に条件式がtrueになってしまう）
+;if result <> 2 then
+;  messagebox '接続できませんでした。' 'メッセージ'
+;  end
+;endif
+
+;; ログファイル名
+;getdate logName '%Y%m%d_%H%M%S.log'
+;makepath logFile logPath logName
+
+;; ログ取得開始
+;logopen logFile
+
+;; 処理
+sendln 'ls'
+;wait '$'
+
+;; ログ取得終了
+;logclose
+
+;; 切断
+;disconnect 0
+
+;; ウィンドウを閉じる
+;closett
+;; マクロ終了
+;end
